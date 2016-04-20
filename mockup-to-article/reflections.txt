@@ -1,0 +1,22 @@
+You've learned a lot about web development so far. I want you to take a moment to write down your thoughts about web development here. Answer the following questions:
+  * What new skills have you learned?
+  * What has been easy?
+  * What has been difficult?
+  * How have you used the problem solving strategies from the first project to overcome challenges so far?
+
+---
+
+Your response goes here!
+
+#What new skills have you learned?
+using <hr>
+
+#What has been easy?
+Almost all is easy.
+
+#What has been difficult?
+Searching for <hr>, didn't think of searching it through search engine.
+
+#How have you used the problem solving strategies from the first project to overcome challenges so far?
+I used MDN and bing.com to solve the probelm.
+
