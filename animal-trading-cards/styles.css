@@ -4,16 +4,10 @@ body{
 	font-family: Arial, sans-serif;
 }
 
-.fish-box {
-	margin-top: 80px;
-	margin-left: 25px;
-	margin-right: 25px;
-	margin-bottom: 400px;
-
+.animal-card {
+	margin: 80px 25px 400px 25px;
 	width: 400px;
-
 	border: 1px solid;
-
 	box-shadow: 3px 5px 20px #ccc;
 }
 
@@ -31,24 +25,20 @@ img {
 	margin-top: -50px;
 }
 
-#description {
+.description-box {
 	width: 298px;
 	border: 1px solid gray;
 	margin-top: 30px;
 	margin-bottom: 40px;
 }
 
-#description > p:first-child {
+.italic-style {
 	font-style: italic;
 }
 
-.description {
+.card-description {
 	margin-left: 30px;
 	margin-right: 30px;
-}
-
-ul {
-	font-style: italic;
 }
 
 li {
