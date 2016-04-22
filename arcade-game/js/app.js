@@ -37,8 +37,8 @@ Enemy.prototype.update = function(dt) {
     };
 
     //Handles collision with the Player
-    if ((this.x + TILE_WIDTH >= player.x && this.x <= player.x && this.y == player.y) || 
-        (this.y + TILE_HEIGHT >= player.y && this.y <= player.y && this.x == player.x)){
+    if (((this.x + TILE_WIDTH >= player.x && this.x <= player.x) ||
+         (player.x + TILE_WIDTH >= this.x && player.x <= this.x)) && this.y == player.y){
         player.reset();
     };
 };
