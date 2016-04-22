@@ -1,6 +1,18 @@
-frontend-nanodegree-arcade-game
-===============================
+# How to play
+========================================
 
-Students should use this [rubric](https://www.udacity.com/course/viewer/#!/c-nd001/l-2696458597/m-2687128535) for self-checking their submission.
+Open index.html in a browser
 
-For detailed instructions on how to get started, check out this [guide](https://docs.google.com/document/d/1v01aScPjSWCCWQLIpFqvg3-vXLH2e8_SZQKC8jNO0Dc/pub?embedded=true).
+- use up arrow to move up
+- use down arrow to move down
+- use right arrow to move right
+- use left arrow to move left
+
+# How to set speedlevel and enemy number
+========================================
+
+Open app.js file by a text editor
+
+- set enemy number by ENEMYNUMBER
+- set speedlevel by SPEEDLEVEL
+
