@@ -1,5 +1,8 @@
-var enemyNumber = 3;
-var speedLevel = 3;
+var ENEMYNUMBER = 3;
+var SPEEDLEVEL = 3;
+var TILE_WIDTH = 101;
+var TILE_HEIGHT = 83;
+
 
 // Enemies our player must avoid
 var Enemy = function() {
@@ -12,12 +15,12 @@ var Enemy = function() {
 
     // Setting the Enemy initial location
     this.x = 0;
-    this.y = (Math.floor((Math.random() * 10) % 3) * 83) + 71;
+    this.y = (Math.floor((Math.random() * 10) % 3) * TILE_HEIGHT) + 71;
     this.orix = this.x;
     this.oriy = this.y;
 
     //Setting the Enemy speed
-    this.speed = Math.floor(Math.random() * 101);
+    this.speed = Math.floor(Math.random() * TILE_WIDTH);
 };
 
 // Update the enemy's position, required method for game
@@ -27,14 +30,15 @@ Enemy.prototype.update = function(dt) {
     // which will ensure the game runs at the same speed for
     // all computers.
     //Updates the Enemy location
-    this.x += this.speed * dt * speedLevel;
+    this.x += this.speed * dt * SPEEDLEVEL;
 
-    if (this.x >= 505) {
+    if (this.x >= TILE_WIDTH * 5) {
         this.x = this.orix;
     };
 
     //Handles collision with the Player
-    if (this.x + 101 >= player.x && this.x <= player.x && this.y == player.y) {
+    if ((this.x + TILE_WIDTH >= player.x && this.x <= player.x && this.y == player.y) || 
+        (this.y + TILE_HEIGHT >= player.y && this.y <= player.y && this.x == player.x)){
         player.reset();
     };
 };
@@ -49,8 +53,8 @@ Enemy.prototype.render = function() {
 // a handleInput() method.
 var Player = function(){
     this.sprite = 'images/char-boy.png';
-    this.x = Math.floor(Math.floor(Math.random() * 10) / 2) * 101;
-    this.y = Math.floor(Math.floor(Math.random() * 10) / 5) * 83 + 320;
+    this.x = Math.floor(Math.floor(Math.random() * 10) / 2) * TILE_WIDTH;
+    this.y = Math.floor(Math.floor(Math.random() * 10) / 5) * TILE_HEIGHT + 320;
     this.orix = this.x;
     this.oriy = this.y;
 };
@@ -60,26 +64,26 @@ Player.prototype.update = function(direction) {
     switch(direction){
         case "left":
             if (this.x > 100) {
-                this.x -= 101;
-            };
+                this.x -= TILE_WIDTH;
+            }
             break;
         case "right":
-            if (this.x < 404) {
-                this.x += 101;
-            };
+            if (this.x < TILE_WIDTH * 4) {
+                this.x += TILE_WIDTH;
+            }
             break;
         case "up":
             if (this.y > 0) {
-                this.y -= 83;
+                this.y -= TILE_HEIGHT;
                 if (this.y < 0) {
                     this.reset();
-                };
-            };
+                }
+            }
             break;
         case "down":
             if (this.y < 403) {
-                this.y += 83;
-            };
+                this.y += TILE_HEIGHT;
+            }
             break;
     }
     //Handles collision with Enemies.
@@ -92,7 +96,7 @@ Player.prototype.reset = function(){
 }
 
 Player.prototype.handleInput = function(key_code){
-    this.update(key_code);  
+    this.update(key_code);
 }
 
 Player.prototype.render = function() {
@@ -104,7 +108,7 @@ Player.prototype.render = function() {
 // Place the player object in a variable called player
 
 var allEnemies = [];
-while(allEnemies.length < enemyNumber) {
+while(allEnemies.length < ENEMYNUMBER) {
     var tmpEm = new Enemy();
     allEnemies.push(tmpEm);
 };
