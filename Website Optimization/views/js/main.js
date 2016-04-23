@@ -450,6 +450,8 @@ var resizePizzas = function(size) {
 
   // Iterates through pizza elements on the page and changes their widths
   function changePizzaSizes(size) {
+    //Get all .randomPizzaContainer element outside to improve efficiency.
+    //Calculate newWidth outside, then apply it to all .randomPizzaContainer
     var containerArr = document.querySelectorAll(".randomPizzaContainer");
     var dx = determineDx(document.querySelector(".randomPizzaContainer"), size);
     var newwidth = (document.querySelector(".randomPizzaContainer").offsetWidth + dx) + 'px';
@@ -504,9 +506,11 @@ function updatePositions() {
   window.performance.mark("mark_start_frame");
 
   var items = document.querySelectorAll('.mover');
+
+  // changed the method to generate random numbers.
   for (var i = 0; i < items.length; i++) {
-    var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
-    items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+    phase = 100 * (Math.random() * 2 - 1);
+    items[i].style.left = items[i].basicLeft + phase + 'px';
   }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.

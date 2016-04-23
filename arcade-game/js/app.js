@@ -1,5 +1,6 @@
 var ENEMYNUMBER = 3;
 var SPEEDLEVEL = 3;
+
 var TILE_WIDTH = 101;
 var TILE_HEIGHT = 83;
 
