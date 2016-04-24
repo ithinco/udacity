@@ -450,6 +450,7 @@ var resizePizzas = function(size) {
 
   // Iterates through pizza elements on the page and changes their widths
   function changePizzaSizes(size) {
+    
     //Get all .randomPizzaContainer element outside to improve efficiency.
     //Calculate newWidth outside, then apply it to all .randomPizzaContainer
     var containerArr = document.querySelectorAll(".randomPizzaContainer");
@@ -505,11 +506,13 @@ function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
 
+  // moved the calculation out of the for loop.
   var items = document.querySelectorAll('.mover');
-
-  // changed the method to generate random numbers.
+  var top = document.body.scrollTop / 1250;
+  var phase;
+  
   for (var i = 0; i < items.length; i++) {
-    phase = 100 * (Math.random() * 2 - 1);
+    phase = 100 * Math.sin(top + i % 5);
     items[i].style.left = items[i].basicLeft + phase + 'px';
   }
 
@@ -530,6 +533,8 @@ window.addEventListener('scroll', updatePositions);
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
+
+  // Use window height to calculate pizza layer number
   for (var i = 0; i < Math.floor(window.innerHeight * cols / 256); i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
