@@ -63,39 +63,41 @@ var app = function() {
         self.marker.addListener('click', toggleBounce);
 
         //Get Infowindow content by Ajax
-        (function(qry, aStr) {
-            var service_url = 'https://kgsearch.googleapis.com/v1/entities:search';
+        (function(obj) {
+            var service_url = 'https://api.foursquare.com/v2/venues/search';
             var params = {
-                'query': qry,
+                'query': obj.name(),
                 'limit': 1,
-                'indent': true,
-                'key': 'AIzaSyBAOfHa5mjt2q7BWFjTUvte0LG5PsmOyfA',
+                'client_id': 'sAXWTAU2UCCXCTGEYHIRKZBKBIPKTODTNE5KGDTSF41X0SI02',
+                'client_secret': 'OPPKISWNY2JXFFFJQ1LULDOSWDEWIPRBIVXAHQILDJP0KUYR',
+                'v': '20130815',
+                'll': obj.lat() + ',' + obj.lng()
             };
-            $.getJSON(service_url + '?callback=?', params, function(response) {
-                $.each(response.itemListElement, function(i, element) {
-                    var contentString = '<div id="content">' +
-                        '<h3>' +
-                        element['result']['name'] +
-                        '</h3>' +
-                        '<p>' +
-                        element['result']['description'] +
-                        '</p>' +
-                        '</div>';
-                    aStr(contentString);
-                });
-            }).fail(function(jqXHR, textStatus, error) {
+            $.getJSON(service_url, params, function(resp) {
                 var contentString = '<div id="content">' +
                     '<h3>' +
-                    textStatus +
+                    resp.response.venues[0].name +
                     '</h3>' +
                     '<p>' +
-                    error +
+                    'has got ' +
+                    resp.response.venues[0].stats.checkinsCount +
+                    ' checkins' +
                     '</p>' +
                     '</div>';
-                aStr(contentString);
-                self.infowindow.open(map, self.marker);
+                obj.contentStr(contentString);
+            }).fail(function(err) {
+                var contentString = '<div id="content">' +
+                    '<h3>' +
+                    err.status +
+                    '</h3>' +
+                    '<p>' +
+                    err.statusText +
+                    '</p>' +
+                    '</div>';
+                obj.contentStr(contentString);
+                obj.isBouncing(true);
             });
-        })(self.name, self.contentStr);
+        })(self);
 
         //Monitor animation state by isBouncing
         function toggleBounce() {
